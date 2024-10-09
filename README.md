@@ -26,12 +26,12 @@ The configuration is modularized to keep things clean and organized. Here's an o
 
 2. Change into the cloned directory:
 
-```bash
-cd nixos-config
-```
+   ```bash
+   cd nixos-config
+   ```
 
 3. Apply the Configuration
 
-```bash
-sudo nixos-rebuild switch --flake .#default
-```
+   ```bash
+   sudo nixos-rebuild switch --flake .#default
+   ```
