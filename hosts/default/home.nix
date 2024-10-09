@@ -11,6 +11,7 @@
     nmap
     dnsutils
     htop
+    python312
 
   ];
 
