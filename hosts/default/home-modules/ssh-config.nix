@@ -12,8 +12,5 @@
         user git
 	IdentityFile ~/.ssh/github
     '';
-
-      }
-    ];
   };
 }

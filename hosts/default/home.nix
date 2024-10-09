@@ -17,6 +17,7 @@
 
   imports = [
     ./home-modules/zsh-ohmyzsh.nix
+    ./home-modules/ssh-config.nix
   ];
 
   programs.home-manager.enable = true;
