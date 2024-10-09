@@ -22,7 +22,7 @@ The configuration is modularized to keep things clean and organized. Here's an o
 
    ```bash
    git clone git@github.com:your-username/nixos-config.git
-  ```
+   ```
 
 2. Change into the cloned directory:
 
