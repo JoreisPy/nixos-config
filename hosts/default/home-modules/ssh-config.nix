@@ -10,7 +10,7 @@
       Host github.com
         HostName github.com
         user git
-	IdentityFile ~/.ssh/github
+	      IdentityFile ~/.ssh/github
     '';
   };
 }
