@@ -74,7 +74,7 @@ in
     isNormalUser = true;
     description = "${username}";
     extraGroups = [ "networkmanager" "wheel" ];
-    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDK5Pd/YeGEat5OmnE9xkXAEF4f58dLcr8eB9j//1T6Z Master-Key" ];
+    openssh.authorizedKeys.keys = [ "${config.sops.secrets."public_keys/Master-key".path}" ];
     packages = with pkgs; [];
     # Set Zsh as the default shell for the user
     shell = pkgs.zsh;
