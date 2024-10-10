@@ -23,5 +23,5 @@ This repository contains my personal NixOS configuration managed with Nix flakes
 3. Apply the Configuration
 
    ```bash
-   sudo nixos-rebuild switch --flake .#default
+   sudo nixos-rebuild switch --flake ~/nixos-config#default
    ```
