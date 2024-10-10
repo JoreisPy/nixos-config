@@ -11,7 +11,7 @@ This repository contains my personal NixOS configuration managed with Nix flakes
 1. Clone this repository to your local machine:
 
    ```bash
-   git clone git@github.com:your-username/nixos-config.git
+   git clone https://github.com/JoreisPy/nixos-config.git
    ```
 
 2. Change into the cloned directory:
