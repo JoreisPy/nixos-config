@@ -22,7 +22,7 @@ in
   
   sops.age.keyFile = "${userHome}/.config/sops/age/keys.txt";
   
-#  sops.secrets.example-key = { };
+  sops.secrets.example-key = { };
    
   
   # Enable Zsh globally
