@@ -12,7 +12,9 @@
     dnsutils
     htop
     python312
-
+    age
+    sops
+    tree
   ];
 
   home.file = {

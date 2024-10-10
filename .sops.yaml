@@ -1,0 +1,14 @@
+---
+#creation_rules:
+#    - age: >-
+#        age16awlqhz7aum8ensp7ppn2m44mw3nxh2ptjvjusmx8vt3808wmspqjlpate
+
+# .sops.yaml
+
+keys:
+  - &primary age16awlqhz7aum8ensp7ppn2m44mw3nxh2ptjvjusmx8vt3808wmspqjlpate
+creation_rules:
+  - path_regex: secrets/secrets.yaml$
+    key_groups:
+    - age:
+      - *primary

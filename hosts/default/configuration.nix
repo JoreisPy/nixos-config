@@ -4,13 +4,27 @@
 
 { config, pkgs, inputs, ... }:
 
+let
+  username = "joreis";  # Define the username here
+  userHome = "/home/${username}";  # Define the home directory based on the username
+in
+
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
+      inputs.sops-nix.nixosModules.sops
     ];
 
+  sops.defaultSopsFile = ./secrets/secrets.yaml;
+  sops.defaultSopsFormat = "yaml";
+  
+  sops.age.keyFile = "${userHome}/.config/sops/age/keys.txt";
+  
+#  sops.secrets.example-key = { };
+   
+  
   # Enable Zsh globally
   programs.zsh.enable = true;
 
@@ -56,9 +70,9 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.joreis = {
+  users.users.${username} = {
     isNormalUser = true;
-    description = "Joao Reis";
+    description = "${username}";
     extraGroups = [ "networkmanager" "wheel" ];
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDK5Pd/YeGEat5OmnE9xkXAEF4f58dLcr8eB9j//1T6Z Master-Key" ];
     packages = with pkgs; [];
@@ -73,21 +87,13 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-  #  neovim
-  #  eza
-  #  htop
-  #  dnsutils
-  #  python312
-  #  git
-  #  nodejs
   ];
-
+ 
   home-manager = {
     # also pass inputs to home-manager modules
     extraSpecialArgs = {inherit inputs;};
     users = {
-      "joreis" = import ./home.nix;
+      "${username}" = import ./home.nix;
     };
   };
 
@@ -119,3 +125,4 @@
   system.stateVersion = "24.05"; # Did you read the comment?
 
 }
+
