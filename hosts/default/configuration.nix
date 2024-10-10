@@ -22,8 +22,8 @@ in
   
   sops.age.keyFile = "${userHome}/.config/sops/age/keys.txt";
   
-  sops.secrets.example-key = { };
-   
+  let
+    master_key = sops.secrets."public_keys/Master-key" = { };   
   
   # Enable Zsh globally
   programs.zsh.enable = true;
