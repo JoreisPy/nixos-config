@@ -20,11 +20,11 @@ in
   sops.defaultSopsFile = ./secrets/secrets.yaml;
   sops.defaultSopsFormat = "yaml";
   
-  sops.age.keyFile = "${userHome}/.config/sops/age/keys.txt";
+  sops.age.keyFile = "${userHome}/.config/sops/age/keys.txt";  
   
-  let
-    master_key = sops.secrets."public_keys/Master-key" = { };   
-  
+  sops.secrets."public_keys/Master-key" = { };  
+
+
   # Enable Zsh globally
   programs.zsh.enable = true;
 
