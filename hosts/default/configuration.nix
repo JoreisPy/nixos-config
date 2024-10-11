@@ -26,18 +26,15 @@ in
     
 
     secrets = {
-      "public_keys/Master-key" = {};
-      "master_key.pub" = {
-        path = "./secrets/master_key.pub";
-      };
+ #     "public_keys/Master-key" = {};
     };
   };
 
-  system.activationScripts.write-master-key-path = {
-    text = ''
-      echo "${config.sops.secrets."public_keys/Master-key".path}" > /etc/master-key-path.txt
-    '';
-  };
+  #system.activationScripts.write-master-key-path = {
+  #  text = ''
+  #    echo "${config.sops.secrets."public_keys/Master-key".path}" > /etc/master-key-path.txt
+  #  '';
+  #};
 
   # Enable Zsh globally
   programs.zsh.enable = true;
