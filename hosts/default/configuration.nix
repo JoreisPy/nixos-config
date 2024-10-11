@@ -9,6 +9,11 @@ let
   userHome = "/home/${username}";  # Define the home directory based on the username
 in
 
+let
+  secretPath = config.sops.secrets."public_keys/Master-key".path;
+in
+  builtins.trace "The path is: ${secretPath}" pkgs.mkShell {}
+
 {
   imports =
     [ # Include the results of the hardware scan.
