@@ -24,20 +24,20 @@ in
 
     age.keyFile = "${userHome}/.config/sops/age/keys.txt";
     
+
     secrets = {
-      "public_keys/Master-key" = { };
-      file = ./secrets/master_key.pub;
-  
+      "public_keys/Master-key" = {};
+      "master_key.pub" = {
+        path = "./secrets/master_key.pub";
+      };
     };
   };
-  
-#  sops.defaultSopsFile = ./secrets/secrets.yaml;
-#  sops.defaultSopsFormat = "yaml";
-  
-#  sops.age.keyFile = "${userHome}/.config/sops/age/keys.txt";  
-  
-#  sops.secrets."public_keys/Master-key" = { };  
 
+  system.activationScripts.write-master-key-path = {
+    text = ''
+      echo "${config.sops.secrets."public_keys/Master-key".path}" > /etc/master-key-path.txt
+    '';
+  };
 
   # Enable Zsh globally
   programs.zsh.enable = true;
@@ -88,11 +88,12 @@ in
     isNormalUser = true;
     description = "${username}";
     extraGroups = [ "networkmanager" "wheel" ];
-    #openssh.authorizedKeys.keys = [ "${config.sops.secrets."public_keys/Master-key".path}" ];
-    #openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDK5Pd/YeGEat5OmnE9xkXAEF4f58dLcr8eB9j//1T6Z Master-Key" ];
+    
     openssh.authorizedKeys.keys = [
-    (builtins.readFile ./keys/master_key.pub)
+     #(cat ${config.sops.secrets."public_keys/Master-key".path})
+     (builtins.readFile ./keys/master_key.pub)
     ]; 
+    
     packages = with pkgs; [];
     # Set Zsh as the default shell for the user
     shell = pkgs.zsh;
@@ -141,6 +142,6 @@ in
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
-
+  
 }
 
