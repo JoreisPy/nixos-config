@@ -9,11 +9,6 @@ let
   userHome = "/home/${username}";  # Define the home directory based on the username
 in
 
-let
-  secretPath = config.sops.secrets."public_keys/Master-key".path;
-in
-  builtins.trace "The path is: ${secretPath}" pkgs.mkShell {}
-
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -79,7 +74,11 @@ in
     isNormalUser = true;
     description = "${username}";
     extraGroups = [ "networkmanager" "wheel" ];
-    openssh.authorizedKeys.keys = [ "${config.sops.secrets."public_keys/Master-key".path}" ];
+    #openssh.authorizedKeys.keys = [ "${config.sops.secrets."public_keys/Master-key".path}" ];
+    #openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDK5Pd/YeGEat5OmnE9xkXAEF4f58dLcr8eB9j//1T6Z Master-Key" ];
+    openssh.authorizedKeys.keys = [
+    (builtins.readFile ./keys/master_key.pub)
+    ]; 
     packages = with pkgs; [];
     # Set Zsh as the default shell for the user
     shell = pkgs.zsh;
