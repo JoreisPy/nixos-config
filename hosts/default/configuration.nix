@@ -16,13 +16,27 @@ in
       inputs.home-manager.nixosModules.default
       inputs.sops-nix.nixosModules.sops
     ];
+  
+  sops = {
+ 
+    defaultSopsFile = ./secrets/secrets.yaml;
+    defaultSopsFormat = "yaml";
 
-  sops.defaultSopsFile = ./secrets/secrets.yaml;
-  sops.defaultSopsFormat = "yaml";
+    age.keyFile = "${userHome}/.config/sops/age/keys.txt";
+    
+    secrets = {
+      "public_keys/Master-key" = { };
+      file = ./secrets/master_key.pub;
   
-  sops.age.keyFile = "${userHome}/.config/sops/age/keys.txt";  
+    };
+  };
   
-  sops.secrets."public_keys/Master-key" = { };  
+#  sops.defaultSopsFile = ./secrets/secrets.yaml;
+#  sops.defaultSopsFormat = "yaml";
+  
+#  sops.age.keyFile = "${userHome}/.config/sops/age/keys.txt";  
+  
+#  sops.secrets."public_keys/Master-key" = { };  
 
 
   # Enable Zsh globally

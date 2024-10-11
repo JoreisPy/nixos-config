@@ -12,3 +12,8 @@ creation_rules:
     key_groups:
     - age:
       - *primary
+
+  - path_regex: secrets/.*\.(key|pub)$
+    key_groups:
+      - age:
+        - *primary
