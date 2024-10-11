@@ -1,5 +1,0 @@
-# Ignore all hidden files by default
-.*
-
-# But include the .sops.yaml file
-!/hosts/default/.sops.yaml
